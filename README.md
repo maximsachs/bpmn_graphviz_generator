@@ -1,6 +1,10 @@
 # BPMN Generation Tool
 Using python and graphviz to automatically generate basic BPMN
 
+# How to run:
+`python bpmn_generator.py`
+
+# How to use
 The graph is specified in the `content_graph.py` file.
 
 Three variables are specified. `graph_name` sets the filename to be used.
