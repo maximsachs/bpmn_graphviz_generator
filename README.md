@@ -141,3 +141,6 @@ message_flow = [
     ("SpaceX_Install Customer Devices", "Starlink Customer_Receiver Installation")
 ]
 ```
+
+Resulting in this graph:
+![Example output](https://github.com/maximsachs/bpmn_graphviz_generator/blob/master/output/SpaceX_bpmn_1_21-February-2020.png "Example Output")
