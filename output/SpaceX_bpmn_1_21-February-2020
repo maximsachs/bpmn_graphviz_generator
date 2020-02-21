@@ -1,0 +1,62 @@
+// SpaceX_bpmn_1
+digraph {
+	mode=kk
+	overlap=scalexy
+	splines=ortho
+	ratio=auto
+	label="SpaceX_bpmn_1 - 21 February 2020" labelloc=t
+	subgraph cluster_SpaceX {
+		color="#7CA4FA" label=SpaceX style=""
+		subgraph cluster_SpaceX_Marketing {
+			color="#7CA4FA" style=""
+			label=Marketing
+			"SpaceX_Promote Capability" [label="Promote Capability" color="#7CA4FA" fixedsize=false penwidth=2 shape=box style=rounded]
+		}
+		subgraph cluster_SpaceX_System_Engineering {
+			color="#7CA4FA" style=""
+			label="System Engineering"
+			"SpaceX_Develop Capability" [label="Develop Capability" color="#7CA4FA" fixedsize=false penwidth=2 shape=box style=rounded]
+			"SpaceX_Develop Capability" -> "SpaceX_Deploy Network" [color="#23445D"]
+			"SpaceX_Develop Capability" -> "SpaceX_Promote Capability" [color="#23445D"]
+			"SpaceX_Deploy Network" [label="Deploy Network" color="#7CA4FA" fixedsize=false penwidth=2 shape=box style=rounded]
+			"SpaceX_Deploy Network" -> "SpaceX_Install Customer Devices" [color="#23445D"]
+			"SpaceX_Install Customer Devices" [label="Install Customer Devices" color="#7CA4FA" fixedsize=false penwidth=2 shape=box style=rounded]
+			"SpaceX_Install Customer Devices" -> "SpaceX_Operate Service" [color="#23445D"]
+			"SpaceX_Operate Service" [label="Operate Service" color="#7CA4FA" fixedsize=false penwidth=2 shape=box style=rounded]
+			"SpaceX_Operate Service" -> "SpaceX_Collect Payment" [color="#23445D"]
+			"SpaceX_Collect Payment" [label="Collect Payment" color="#7CA4FA" fixedsize=shape penwidth=2 shape=doublecircle style=""]
+			"SpaceX_Collect Payment" -> "SpaceX_Develop Capability" [color="#23445D"]
+		}
+	}
+	subgraph cluster_Starlink_Customer {
+		color="#7CA4FA" label="Starlink Customer" style=""
+		subgraph cluster_Starlink_Customer_main {
+			color="#7CA4FA" style=""
+			label=""
+			"Starlink Customer_Need Internet" [label="Need Internet" color="#7CA4FA" fixedsize=shape penwidth=2 shape=circle style=""]
+			"Starlink Customer_Need Internet" -> "Starlink Customer_Evaluate Providers" [color="#23445D"]
+			"Starlink Customer_Evaluate Providers" [label="Evaluate Providers" color="#7CA4FA" fixedsize=false penwidth=2 shape=box style=rounded]
+			"Starlink Customer_Evaluate Providers" -> "Starlink Customer_Order SpaceX" [color="#23445D"]
+			"Starlink Customer_Order SpaceX" [label="Order SpaceX" color="#7CA4FA" fixedsize=false penwidth=2 shape=box style=rounded]
+			"Starlink Customer_Order SpaceX" -> "Starlink Customer_wait for availability" [color="#23445D"]
+			"Starlink Customer_wait for availability" [label="wait for availability" color="#7CA4FA" fixedsize=false penwidth=2 shape=diamond style=""]
+			"Starlink Customer_wait for availability" -> "Starlink Customer_Receiver Installation" [color="#23445D"]
+			"Starlink Customer_wait for availability" -> "Starlink Customer_Took too long" [color="#23445D"]
+			"Starlink Customer_Receiver Installation" [label="Receiver Installation" color="#7CA4FA" fixedsize=shape penwidth=2 shape=doublecircle style=""]
+			"Starlink Customer_Receiver Installation" -> "Starlink Customer_Subscription Payments" [color="#23445D"]
+			"Starlink Customer_Subscription Payments" [label="Subscription Payments" color="#7CA4FA" fixedsize=false penwidth=2 shape=box style=rounded]
+			"Starlink Customer_Subscription Payments" -> "Starlink Customer_Use Internet Service" [color="#23445D"]
+			"Starlink Customer_Took too long" [label="Took too long" color="#7CA4FA" fixedsize=shape penwidth=2 shape=doublecircle style=""]
+			"Starlink Customer_Took too long" -> "Starlink Customer_Abandon SpaceX
+switch ISP" [color="#23445D"]
+			"Starlink Customer_Abandon SpaceX
+switch ISP" [label="Abandon SpaceX
+switch ISP" color="#7CA4FA" fixedsize=false penwidth=2 shape=box style=rounded]
+			"Starlink Customer_Use Internet Service" [label="Use Internet Service" color="#7CA4FA" fixedsize=shape penwidth=8 shape=circle style=""]
+		}
+	}
+	"SpaceX_Promote Capability" -> "Starlink Customer_Evaluate Providers" [arrowhead=empty color="#23445D" dir=forward style=dashed]
+	"Starlink Customer_Order SpaceX" -> "SpaceX_Deploy Network" [arrowhead=empty color="#23445D" dir=forward style=dashed]
+	"Starlink Customer_Subscription Payments" -> "SpaceX_Collect Payment" [arrowhead=empty color="#23445D" dir=forward style=dashed]
+	"SpaceX_Install Customer Devices" -> "Starlink Customer_Receiver Installation" [arrowhead=empty color="#23445D" dir=forward style=dashed]
+}

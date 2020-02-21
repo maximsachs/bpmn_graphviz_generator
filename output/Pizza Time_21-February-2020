@@ -1,0 +1,70 @@
+// Pizza Time
+digraph {
+	mode=kk
+	overlap=scalexy
+	splines=ortho
+	ratio=auto
+	label="Pizza Time - 21 February 2020" labelloc=t
+	subgraph cluster_Pizza_Customer {
+		color="#7CA4FA" label="Pizza Customer" style=""
+		subgraph cluster_Pizza_Customer_main {
+			color="#7CA4FA" style=""
+			label=""
+			"Pizza Customer_Hungry for pizza" [label="Hungry for pizza" color="#7CA4FA" fixedsize=shape penwidth=2 shape=circle style=""]
+			"Pizza Customer_Hungry for pizza" -> "Pizza Customer_Select a pizza" [color="#23445D"]
+			"Pizza Customer_Select a pizza" [label="Select a pizza" color="#7CA4FA" fixedsize=false penwidth=2 shape=box style=rounded]
+			"Pizza Customer_Select a pizza" -> "Pizza Customer_Order a pizza" [color="#23445D"]
+			"Pizza Customer_Order a pizza" [label="Order a pizza" color="#7CA4FA" fixedsize=false penwidth=2 shape=box style=rounded]
+			"Pizza Customer_Order a pizza" -> "Pizza Customer_call or wait" [color="#23445D"]
+			"Pizza Customer_call or wait" [label="event driven" color="#7CA4FA" fixedsize=false penwidth=2 shape=diamond style=""]
+			"Pizza Customer_call or wait" -> "Pizza Customer_pizza received" [color="#23445D"]
+			"Pizza Customer_call or wait" -> "Pizza Customer_60 minutes" [color="#23445D"]
+			"Pizza Customer_pizza received" [label="pizza received" color="#7CA4FA" fixedsize=shape penwidth=2 shape=doublecircle style=""]
+			"Pizza Customer_pizza received" -> "Pizza Customer_Pay for pizza" [color="#23445D"]
+			"Pizza Customer_Pay for pizza" [label="Pay for pizza" color="#7CA4FA" fixedsize=false penwidth=2 shape=box style=rounded]
+			"Pizza Customer_Pay for pizza" -> "Pizza Customer_Eat pizza" [color="#23445D"]
+			"Pizza Customer_Eat pizza" [label="Eat pizza" color="#7CA4FA" fixedsize=false penwidth=2 shape=box style=rounded]
+			"Pizza Customer_Eat pizza" -> "Pizza Customer_hunger satisfied" [color="#23445D"]
+			"Pizza Customer_60 minutes" [label="60 minutes" color="#7CA4FA" fixedsize=shape penwidth=2 shape=doublecircle style=""]
+			"Pizza Customer_60 minutes" -> "Pizza Customer_Ask for pizza" [color="#23445D"]
+			"Pizza Customer_Ask for pizza" [label="Ask for pizza" color="#7CA4FA" fixedsize=false penwidth=2 shape=box style=rounded]
+			"Pizza Customer_hunger satisfied" [label="hunger satisfied" color="#7CA4FA" fixedsize=shape penwidth=8 shape=circle style=""]
+		}
+	}
+	subgraph cluster_Pizza_Vendor {
+		color="#7CA4FA" label="Pizza Vendor" style=""
+		subgraph cluster_Pizza_Vendor_Delivery_Boy {
+			color="#7CA4FA" style=""
+			label="Delivery Boy"
+			"Pizza Vendor_Deliver the pizza" [label="Deliver the pizza" color="#7CA4FA" fixedsize=false penwidth=2 shape=box style=rounded]
+			"Pizza Vendor_Deliver the pizza" -> "Pizza Vendor_Receive Payment" [color="#23445D"]
+			"Pizza Vendor_Receive Payment" [label="Receive Payment" color="#7CA4FA" fixedsize=false penwidth=2 shape=box style=rounded]
+			"Pizza Vendor_Receive Payment" -> "Pizza Vendor_Process finish" [color="#23445D"]
+			"Pizza Vendor_Process finish" [label="Process finish" color="#7CA4FA" fixedsize=shape penwidth=8 shape=circle style=""]
+		}
+		subgraph cluster_Pizza_Vendor_Chef {
+			color="#7CA4FA" style=""
+			label=Chef
+			"Pizza Vendor_Bake the pizza" [label="Bake the pizza" color="#7CA4FA" fixedsize=false penwidth=2 shape=box style=rounded]
+			"Pizza Vendor_Bake the pizza" -> "Pizza Vendor_Deliver the pizza" [color="#23445D"]
+		}
+		subgraph cluster_Pizza_Vendor_clock {
+			color="#7CA4FA" style=""
+			label=clock
+			"Pizza Vendor_Order Received" [label="Order Received" color="#7CA4FA" fixedsize=shape penwidth=2 shape=circle style=""]
+			"Pizza Vendor_Order Received" -> "Pizza Vendor_Start cooking" [color="#23445D"]
+			"Pizza Vendor_Start cooking" [label="+" color="#7CA4FA" fixedsize=false penwidth=2 shape=diamond style=""]
+			"Pizza Vendor_Start cooking" -> "Pizza Vendor_Where is my pizza" [color="#23445D"]
+			"Pizza Vendor_Start cooking" -> "Pizza Vendor_Bake the pizza" [color="#23445D"]
+			"Pizza Vendor_Where is my pizza" [label="Where is my pizza" color="#7CA4FA" fixedsize=shape penwidth=2 shape=doublecircle style=""]
+			"Pizza Vendor_Where is my pizza" -> "Pizza Vendor_Calm customer" [color="#23445D"]
+			"Pizza Vendor_Calm customer" [label="Calm customer" color="#7CA4FA" fixedsize=false penwidth=2 shape=box style=rounded]
+			"Pizza Vendor_Calm customer" -> "Pizza Vendor_Where is my pizza" [color="#23445D"]
+		}
+	}
+	"Pizza Customer_Order a pizza" -> "Pizza Vendor_Order Received" [arrowhead=empty color="#23445D" dir=forward style=dashed]
+	"Pizza Customer_Ask for pizza" -> "Pizza Vendor_Where is my pizza" [arrowhead=empty color="#23445D" dir=forward style=dashed]
+	"Pizza Vendor_Calm customer" -> "Pizza Customer_Ask for pizza" [arrowhead=empty color="#23445D" dir=forward style=dashed]
+	"Pizza Customer_Pay for pizza" -> "Pizza Vendor_Receive Payment" [arrowhead=empty color="#23445D" dir=forward style=dashed]
+	"Pizza Vendor_Receive Payment" -> "Pizza Customer_Pay for pizza" [arrowhead=empty color="#23445D" dir=forward style=dashed]
+}
