@@ -1,6 +1,10 @@
 # BPMN Generation Tool
 Using python and graphviz to automatically generate basic BPMN
 
+# How to Install
+1.  Git clone this repository
+2.  Install graphviz: `conda install -c anaconda graphviz` (for anaconda)
+
 # How to run:
 `python bpmn_generator.py`
 
