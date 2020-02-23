@@ -31,7 +31,7 @@ dot.attr(splines="ortho")
 dot.attr(ratio="auto")
 # dot.attr(ratio="0.6")
 # dot.attr(concentrate="true")
-# dot.attr(margin="")
+# dot.attr(margin="0.2")
 today = datetime.date.today()
 current_date_str = today.strftime("%d %B %Y")
 # dot.attr(label=graph_name+" - "+current_date_str, labelloc="t")
@@ -64,6 +64,7 @@ for pool in bpmn:
             lane_name = "_".join(["cluster",pool,lane]).replace(" ", "_")
             with pool_dot.subgraph(name=lane_name) as pool_lane_dot:
                 pool_lane_dot.attr(color=default_fillcolor1, style="")
+                # pool_lane_dot.attr(margin="20")
                 if len(lanes) > 1:
                     pool_lane_dot.attr(label=lane)
                 else:

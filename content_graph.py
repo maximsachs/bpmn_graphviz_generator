@@ -59,14 +59,14 @@ bpmn = {
                  "label": "Routing\nselection",
                  "target": [
                         "Sat.\nNetwork",
-                        "Conv.\nNetwork\n(if avail.)",
+                        ("Conv.\nNetwork", "if\navail."),
                     ]
                 },
                 {"label": "Sat.\nNetwork",
                  "type": "event",
                  "target": "Operate Service"
                 },
-                {"label": "Conv.\nNetwork\n(if avail.)",
+                {"label": "Conv.\nNetwork",
                  "type": "event",
                  "target": "Operate Service"
                 },
@@ -163,9 +163,9 @@ bpmn = {
                  "type": "gateway",
                  "label": "Select\nISP",
                  "target": [
-                        ("Order\nSpaceX", "+ high coverage\n+ low cost\n+ low latency"),
-                        ("Order\nViaSat/\nIridium", "~ good coverage\n- high cost\n- high latency"),
-                        ("Order\nconv.\nISP", "- low coverage\n+ low cost\n+ low latency"),
+                        ("Order\nSpaceX", "high coverage\nlow cost\nlow latency"),
+                        ("Order\nViaSat/\nIridium", "good coverage\nhigh cost\nhigh latency"),
+                        ("Order\nconv.\nISP", "low coverage\nlow cost\nlow latency"),
                     ]
                 },
                 {"label": "Order\nSpaceX",
@@ -190,7 +190,15 @@ bpmn = {
                 },
                 {"label": "Receiver\ninstall",
                  "type": "event",
-                 "target": "Subscription Payments"
+                 "target": "Requirements\nfulfilled"
+                },
+
+                {"label": "Requirements\nfulfilled",
+                 "type": "gateway",
+                 "target": [
+                        ("Subscription Payments", "yes"),
+                        ("Abandon ISP\nswitch to competitor", "no")
+                    ]
                 },
                 {"label": "Subscription Payments",
                  "type": "activity",

@@ -68,21 +68,18 @@ selection" -> "ViaSat/Iridium_Sat.
 Network" [color="#2f658f"]
 			"ViaSat/Iridium_Routing
 selection" -> "ViaSat/Iridium_Conv.
-Network
-(if avail.)" [color="#2f658f"]
+Network" [color="#d15411" fontcolor="#d15411" fontname="sans bold" xlabel="if
+avail."]
 			"ViaSat/Iridium_Sat.
 Network" [label="Sat.
 Network" color="#7CA4FA" margin="0,05" penwidth=2 shape=doublecircle style="" width="0,35"]
 			"ViaSat/Iridium_Sat.
 Network" -> "ViaSat/Iridium_Operate Service" [color="#2f658f"]
 			"ViaSat/Iridium_Conv.
-Network
-(if avail.)" [label="Conv.
-Network
-(if avail.)" color="#7CA4FA" margin="0,05" penwidth=2 shape=doublecircle style="" width="0,35"]
+Network" [label="Conv.
+Network" color="#7CA4FA" margin="0,05" penwidth=2 shape=doublecircle style="" width="0,35"]
 			"ViaSat/Iridium_Conv.
-Network
-(if avail.)" -> "ViaSat/Iridium_Operate Service" [color="#2f658f"]
+Network" -> "ViaSat/Iridium_Operate Service" [color="#2f658f"]
 			"ViaSat/Iridium_Operate Service" [label="Operate Service" color="#7CA4FA" margin="0,1" penwidth=2 shape=box style=rounded width="0,35"]
 			"ViaSat/Iridium_Operate Service" -> "ViaSat/Iridium_Collect
 Payment" [color="#2f658f"]
@@ -212,21 +209,21 @@ ISP" [label="Select
 ISP" color="#7CA4FA" margin="0,1" penwidth=2 shape=diamond style="" width="0,35"]
 			"Customer_Select
 ISP" -> "Customer_Order
-SpaceX" [color="#d15411" fontcolor="#d15411" fontname="sans bold" xlabel="+ high coverage
-+ low cost
-+ low latency"]
+SpaceX" [color="#d15411" fontcolor="#d15411" fontname="sans bold" xlabel="high coverage
+low cost
+low latency"]
 			"Customer_Select
 ISP" -> "Customer_Order
 ViaSat/
-Iridium" [color="#d15411" fontcolor="#d15411" fontname="sans bold" xlabel="~ good coverage
-- high cost
-- high latency"]
+Iridium" [color="#d15411" fontcolor="#d15411" fontname="sans bold" xlabel="good coverage
+high cost
+high latency"]
 			"Customer_Select
 ISP" -> "Customer_Order
 conv.
-ISP" [color="#d15411" fontcolor="#d15411" fontname="sans bold" xlabel="- low coverage
-+ low cost
-+ low latency"]
+ISP" [color="#d15411" fontcolor="#d15411" fontname="sans bold" xlabel="low coverage
+low cost
+low latency"]
 			"Customer_Order
 SpaceX" [label="Order
 SpaceX" color="#7CA4FA" margin="0,05" penwidth=2 shape=doublecircle style="" width="0,35"]
@@ -265,7 +262,16 @@ long" [color="#2f658f"]
 install" [label="Receiver
 install" color="#7CA4FA" margin="0,05" penwidth=2 shape=doublecircle style="" width="0,35"]
 			"Customer_Receiver
-install" -> "Customer_Subscription Payments" [color="#2f658f"]
+install" -> "Customer_Requirements
+fulfilled" [color="#2f658f"]
+			"Customer_Requirements
+fulfilled" [label="Requirements
+fulfilled" color="#7CA4FA" margin="0,1" penwidth=2 shape=diamond style="" width="0,35"]
+			"Customer_Requirements
+fulfilled" -> "Customer_Subscription Payments" [color="#d15411" fontcolor="#d15411" fontname="sans bold" xlabel=yes]
+			"Customer_Requirements
+fulfilled" -> "Customer_Abandon ISP
+switch to competitor" [color="#d15411" fontcolor="#d15411" fontname="sans bold" xlabel=no]
 			"Customer_Subscription Payments" [label="Subscription Payments" color="#7CA4FA" margin="0,1" penwidth=2 shape=box style=rounded width="0,35"]
 			"Customer_Subscription Payments" -> "Customer_Use
 Internet
