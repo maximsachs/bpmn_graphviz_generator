@@ -14,59 +14,197 @@ bpmn = {
                 },
                 {"label": "Deploy Network",
                  "type": "activity",
-                 "target": "Install Customer Devices"
+                 "target": "Install Customer Devices\n1000 MB/s"
                 },
-                {"label": "Install Customer Devices",
+                {"label": "Install Customer Devices\n1000 MB/s",
                  "type": "activity",
                  "target": "Operate Service"
                 },
                 {"label": "Operate Service",
                  "type": "activity",
-                 "target": "Collect Payment"
+                 "target": "Collect\nPayment"
                 },
-                {"label": "Collect Payment",
+                {"label": "Collect\nPayment",
                  "type": "event",
-                 "target": "Develop Capability"
+                 "target": ("Develop Capability", "Reinvest\nall profits")
+                },
+            ],
+        },
+        "ViaSat/Iridium": {
+            "Marketing":[
+                {"label": "Promote Capability",
+                 "type": "activity",
+                },
+            ],
+            "System Engineering": [
+                {"label": "Develop Capability",
+                 "type": "activity",
+                 "target": ["Deploy Network",
+                            "Promote Capability"]
+                },
+                {"label": "Deploy Network",
+                 "type": "activity",
+                 "target": "Install Customer Devices\n10 MB/s"
+                },
+                {"label": "Install Customer Devices\n10 MB/s",
+                 "type": "activity",
+                 "target": "Connect to NOC Hub"
+                },
+                {"label": "Connect to NOC Hub",
+                 "type": "activity",
+                 "target": "Routing\nselection"
+                },
+                {"name":"Routing\nselection",
+                 "type": "gateway",
+                 "label": "Routing\nselection",
+                 "target": [
+                        "Sat.\nNetwork",
+                        "Conv.\nNetwork\n(if avail.)",
+                    ]
+                },
+                {"label": "Sat.\nNetwork",
+                 "type": "event",
+                 "target": "Operate Service"
+                },
+                {"label": "Conv.\nNetwork\n(if avail.)",
+                 "type": "event",
+                 "target": "Operate Service"
+                },
+                {"label": "Operate Service",
+                 "type": "activity",
+                 "target": "Collect\nPayment"
+                },
+                {"label": "Collect\nPayment",
+                 "type": "event",
+                 "target": [
+                     "Take\nProfit",
+                     "Develop Capability"
+                 ]
+                },
+                {"label": "Take\nProfit",
+                 "type": "end",
                 },
             ],
             },
-        "Starlink Customer": {"main":[
-                {"label": "Need Internet",
-                 "type": "start",
-                 "target":"Evaluate Providers"
-                },
-                {"label": "Evaluate Providers",
+        "Conventional ISP's":{
+            "Marketing":[
+                {"label": "Promote Capability",
                  "type": "activity",
-                 "target":"Order SpaceX"
                 },
-                {"label": "Order SpaceX",
+            ],
+            "System Operations":[
+                {"label": "Develop Capability",
                  "type": "activity",
-                 "target": "wait for availability"
+                 "target": ["Select\nConnection\nType",
+                            "Promote Capability"]
                 },
-                {"name":"wait for availability",
+                {"name":"Select\nConnection\nType",
                  "type": "gateway",
-                 "label": "wait for availability",
+                 "label": "Select\nConnection\nType",
                  "target": [
-                        "Receiver Installation",
-                        "Took too long"
+                        "DSL\n40\nMB/s",
+                        "Ethernet\n100\nMB/s",
+                        "Fiber\n1000\nMB/s"
                     ]
                 },
-                {"label": "Receiver Installation",
+                {"label": "Ethernet\n100\nMB/s",
+                 "type": "event",
+                 "target": "Connect user to FDDI"
+                },
+                {"label": "DSL\n40\nMB/s",
+                 "type": "event",
+                 "target": "Connect user to FDDI"
+                },
+                {"label": "Fiber\n1000\nMB/s",
+                 "type": "event",
+                 "target": "Connect user to FDDI"
+                },
+                {"label": "Connect user to FDDI",
+                 "type": "activity",
+                 "target":"Collect\nPayment"
+                },
+                {"label": "Collect\nPayment",
+                 "type": "event",
+                 "target": [
+                     "Take\nProfit",
+                     "Develop Capability"
+                 ]
+                },
+                {"label": "Take\nProfit",
+                 "type": "end",
+                },
+            ]
+        },
+        "Customer": {"main":[
+                {"label": "Need\nInternet",
+                 "type": "start",
+                 "target":"Type of\nconnection"
+                },
+                {"label": "Type of\nconnection",
+                 "type": "gateway",
+                 "target":[
+                        "Home\nInternet",
+                        "Business\nInternet"
+                    ]
+                },
+                {"label": "Home\nInternet",
+                 "type": "event",
+                 "target": "Evaluate existing ISP's"
+                },
+                {"label": "Business\nInternet",
+                 "type": "event",
+                 "target": "Evaluate existing ISP's"
+                },
+                {"label": "Evaluate existing ISP's",
+                 "type": "activity",
+                 "target":"Select\nISP"
+                },
+                {"name":"Select\nISP",
+                 "type": "gateway",
+                 "label": "Select\nISP",
+                 "target": [
+                        ("Order\nSpaceX", "+ high coverage\n+ low cost\n+ low latency"),
+                        ("Order\nViaSat/\nIridium", "~ good coverage\n- high cost\n- high latency"),
+                        ("Order\nconv.\nISP", "- low coverage\n+ low cost\n+ low latency"),
+                    ]
+                },
+                {"label": "Order\nSpaceX",
+                 "type": "event",
+                 "target": "wait for\navailability"
+                },
+                {"label": "Order\nViaSat/\nIridium",
+                 "type": "event",
+                 "target": "wait for\navailability"
+                },
+                {"label": "Order\nconv.\nISP",
+                 "type": "event",
+                 "target": "wait for\navailability"
+                },
+                {"name":"wait for\navailability",
+                 "type": "gateway",
+                 "label": "wait for\navailability",
+                 "target": [
+                        "Receiver\ninstall",
+                        "Took\ntoo\nlong"
+                    ]
+                },
+                {"label": "Receiver\ninstall",
                  "type": "event",
                  "target": "Subscription Payments"
                 },
                 {"label": "Subscription Payments",
                  "type": "activity",
-                 "target": "Use Internet Service"
+                 "target": "Use\nInternet\nService"
                 },
-                {"label": "Took too long",
+                {"label": "Took\ntoo\nlong",
                  "type": "event",
-                 "target": "Abandon SpaceX\nswitch ISP"
+                 "target": "Abandon ISP\nswitch to competitor"
                 },
-                {"label": "Abandon SpaceX\nswitch ISP",
+                {"label": "Abandon ISP\nswitch to competitor",
                  "type": "activity",
+                 "target": "Select\nISP"
                 },
-                {"label": "Use Internet Service",
+                {"label": "Use\nInternet\nService",
                  "type": "end",
                 },
             ]},
@@ -76,8 +214,16 @@ bpmn = {
 # (label, label)
 # When running the generation script will print all node names. Use those for the message flow below:
 message_flow = [
-    ("SpaceX_Promote Capability", "Starlink Customer_Evaluate Providers"),
-    ("Starlink Customer_Order SpaceX", "SpaceX_Deploy Network"),
-    ("Starlink Customer_Subscription Payments", "SpaceX_Collect Payment"),
-    ("SpaceX_Install Customer Devices", "Starlink Customer_Receiver Installation")
+    ("SpaceX_Promote Capability", "Customer_Evaluate existing ISP's"),
+    ("Customer_Order\nSpaceX", "SpaceX_Deploy Network"),
+    ("Customer_Subscription Payments", "SpaceX_Collect\nPayment"),
+    ("SpaceX_Install Customer Devices\n1000 MB/s", "Customer_Receiver\ninstall"),
+    ("Customer_Order\nconv.\nISP", "Conventional ISP's_Select\nConnection\nType"),
+    ("Conventional ISP's_Connect user to FDDI", "Customer_Receiver\ninstall"),
+    ("Customer_Subscription Payments", "Conventional ISP's_Collect\nPayment"),
+    ("Conventional ISP's_Promote Capability", "Customer_Evaluate existing ISP's"),
+    ("ViaSat/Iridium_Promote Capability", "Customer_Evaluate existing ISP's"),
+    ("Customer_Order\nViaSat/\nIridium", "ViaSat/Iridium_Deploy Network"),
+    ("ViaSat/Iridium_Install Customer Devices\n10 MB/s", "Customer_Receiver\ninstall"),
+    ("Customer_Subscription Payments", "ViaSat/Iridium_Collect\nPayment"),
 ]

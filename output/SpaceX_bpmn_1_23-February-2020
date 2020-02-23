@@ -1,0 +1,322 @@
+// SpaceX_bpmn_1
+digraph {
+	mode=kk
+	overlap=scalexy
+	splines=ortho
+	ratio=auto
+	subgraph cluster_SpaceX {
+		color="#7CA4FA" label=SpaceX style=""
+		subgraph cluster_SpaceX_Marketing {
+			color="#7CA4FA" style=""
+			label=Marketing
+			"SpaceX_Promote Capability" [label="Promote Capability" color="#7CA4FA" margin="0,1" penwidth=2 shape=box style=rounded width="0,35"]
+		}
+		subgraph cluster_SpaceX_System_Engineering {
+			color="#7CA4FA" style=""
+			label="System Engineering"
+			"SpaceX_Develop Capability" [label="Develop Capability" color="#7CA4FA" margin="0,1" penwidth=2 shape=box style=rounded width="0,35"]
+			"SpaceX_Develop Capability" -> "SpaceX_Deploy Network" [color="#2f658f"]
+			"SpaceX_Develop Capability" -> "SpaceX_Promote Capability" [color="#2f658f"]
+			"SpaceX_Deploy Network" [label="Deploy Network" color="#7CA4FA" margin="0,1" penwidth=2 shape=box style=rounded width="0,35"]
+			"SpaceX_Deploy Network" -> "SpaceX_Install Customer Devices
+1000 MB/s" [color="#2f658f"]
+			"SpaceX_Install Customer Devices
+1000 MB/s" [label="Install Customer Devices
+1000 MB/s" color="#7CA4FA" margin="0,1" penwidth=2 shape=box style=rounded width="0,35"]
+			"SpaceX_Install Customer Devices
+1000 MB/s" -> "SpaceX_Operate Service" [color="#2f658f"]
+			"SpaceX_Operate Service" [label="Operate Service" color="#7CA4FA" margin="0,1" penwidth=2 shape=box style=rounded width="0,35"]
+			"SpaceX_Operate Service" -> "SpaceX_Collect
+Payment" [color="#2f658f"]
+			"SpaceX_Collect
+Payment" [label="Collect
+Payment" color="#7CA4FA" margin="0,05" penwidth=2 shape=doublecircle style="" width="0,35"]
+			"SpaceX_Collect
+Payment" -> "SpaceX_Develop Capability" [color="#d15411" fontcolor="#d15411" fontname="sans bold" xlabel="Reinvest
+all profits"]
+		}
+	}
+	subgraph "cluster_ViaSat/Iridium" {
+		color="#7CA4FA" label="ViaSat/Iridium" style=""
+		subgraph "cluster_ViaSat/Iridium_Marketing" {
+			color="#7CA4FA" style=""
+			label=Marketing
+			"ViaSat/Iridium_Promote Capability" [label="Promote Capability" color="#7CA4FA" margin="0,1" penwidth=2 shape=box style=rounded width="0,35"]
+		}
+		subgraph "cluster_ViaSat/Iridium_System_Engineering" {
+			color="#7CA4FA" style=""
+			label="System Engineering"
+			"ViaSat/Iridium_Develop Capability" [label="Develop Capability" color="#7CA4FA" margin="0,1" penwidth=2 shape=box style=rounded width="0,35"]
+			"ViaSat/Iridium_Develop Capability" -> "ViaSat/Iridium_Deploy Network" [color="#2f658f"]
+			"ViaSat/Iridium_Develop Capability" -> "ViaSat/Iridium_Promote Capability" [color="#2f658f"]
+			"ViaSat/Iridium_Deploy Network" [label="Deploy Network" color="#7CA4FA" margin="0,1" penwidth=2 shape=box style=rounded width="0,35"]
+			"ViaSat/Iridium_Deploy Network" -> "ViaSat/Iridium_Install Customer Devices
+10 MB/s" [color="#2f658f"]
+			"ViaSat/Iridium_Install Customer Devices
+10 MB/s" [label="Install Customer Devices
+10 MB/s" color="#7CA4FA" margin="0,1" penwidth=2 shape=box style=rounded width="0,35"]
+			"ViaSat/Iridium_Install Customer Devices
+10 MB/s" -> "ViaSat/Iridium_Connect to NOC Hub" [color="#2f658f"]
+			"ViaSat/Iridium_Connect to NOC Hub" [label="Connect to NOC Hub" color="#7CA4FA" margin="0,1" penwidth=2 shape=box style=rounded width="0,35"]
+			"ViaSat/Iridium_Connect to NOC Hub" -> "ViaSat/Iridium_Routing
+selection" [color="#2f658f"]
+			"ViaSat/Iridium_Routing
+selection" [label="Routing
+selection" color="#7CA4FA" margin="0,1" penwidth=2 shape=diamond style="" width="0,35"]
+			"ViaSat/Iridium_Routing
+selection" -> "ViaSat/Iridium_Sat.
+Network" [color="#2f658f"]
+			"ViaSat/Iridium_Routing
+selection" -> "ViaSat/Iridium_Conv.
+Network
+(if avail.)" [color="#2f658f"]
+			"ViaSat/Iridium_Sat.
+Network" [label="Sat.
+Network" color="#7CA4FA" margin="0,05" penwidth=2 shape=doublecircle style="" width="0,35"]
+			"ViaSat/Iridium_Sat.
+Network" -> "ViaSat/Iridium_Operate Service" [color="#2f658f"]
+			"ViaSat/Iridium_Conv.
+Network
+(if avail.)" [label="Conv.
+Network
+(if avail.)" color="#7CA4FA" margin="0,05" penwidth=2 shape=doublecircle style="" width="0,35"]
+			"ViaSat/Iridium_Conv.
+Network
+(if avail.)" -> "ViaSat/Iridium_Operate Service" [color="#2f658f"]
+			"ViaSat/Iridium_Operate Service" [label="Operate Service" color="#7CA4FA" margin="0,1" penwidth=2 shape=box style=rounded width="0,35"]
+			"ViaSat/Iridium_Operate Service" -> "ViaSat/Iridium_Collect
+Payment" [color="#2f658f"]
+			"ViaSat/Iridium_Collect
+Payment" [label="Collect
+Payment" color="#7CA4FA" margin="0,05" penwidth=2 shape=doublecircle style="" width="0,35"]
+			"ViaSat/Iridium_Collect
+Payment" -> "ViaSat/Iridium_Take
+Profit" [color="#2f658f"]
+			"ViaSat/Iridium_Collect
+Payment" -> "ViaSat/Iridium_Develop Capability" [color="#2f658f"]
+			"ViaSat/Iridium_Take
+Profit" [label="Take
+Profit" color="#7CA4FA" margin="0,05" penwidth=7.0 shape=circle style="" width="0,35"]
+		}
+	}
+	subgraph "cluster_Conventional_ISP's" {
+		color="#7CA4FA" label="Conventional ISP's" style=""
+		subgraph "cluster_Conventional_ISP's_Marketing" {
+			color="#7CA4FA" style=""
+			label=Marketing
+			"Conventional ISP's_Promote Capability" [label="Promote Capability" color="#7CA4FA" margin="0,1" penwidth=2 shape=box style=rounded width="0,35"]
+		}
+		subgraph "cluster_Conventional_ISP's_System_Operations" {
+			color="#7CA4FA" style=""
+			label="System Operations"
+			"Conventional ISP's_Develop Capability" [label="Develop Capability" color="#7CA4FA" margin="0,1" penwidth=2 shape=box style=rounded width="0,35"]
+			"Conventional ISP's_Develop Capability" -> "Conventional ISP's_Select
+Connection
+Type" [color="#2f658f"]
+			"Conventional ISP's_Develop Capability" -> "Conventional ISP's_Promote Capability" [color="#2f658f"]
+			"Conventional ISP's_Select
+Connection
+Type" [label="Select
+Connection
+Type" color="#7CA4FA" margin="0,1" penwidth=2 shape=diamond style="" width="0,35"]
+			"Conventional ISP's_Select
+Connection
+Type" -> "Conventional ISP's_DSL
+40
+MB/s" [color="#2f658f"]
+			"Conventional ISP's_Select
+Connection
+Type" -> "Conventional ISP's_Ethernet
+100
+MB/s" [color="#2f658f"]
+			"Conventional ISP's_Select
+Connection
+Type" -> "Conventional ISP's_Fiber
+1000
+MB/s" [color="#2f658f"]
+			"Conventional ISP's_Ethernet
+100
+MB/s" [label="Ethernet
+100
+MB/s" color="#7CA4FA" margin="0,05" penwidth=2 shape=doublecircle style="" width="0,35"]
+			"Conventional ISP's_Ethernet
+100
+MB/s" -> "Conventional ISP's_Connect user to FDDI" [color="#2f658f"]
+			"Conventional ISP's_DSL
+40
+MB/s" [label="DSL
+40
+MB/s" color="#7CA4FA" margin="0,05" penwidth=2 shape=doublecircle style="" width="0,35"]
+			"Conventional ISP's_DSL
+40
+MB/s" -> "Conventional ISP's_Connect user to FDDI" [color="#2f658f"]
+			"Conventional ISP's_Fiber
+1000
+MB/s" [label="Fiber
+1000
+MB/s" color="#7CA4FA" margin="0,05" penwidth=2 shape=doublecircle style="" width="0,35"]
+			"Conventional ISP's_Fiber
+1000
+MB/s" -> "Conventional ISP's_Connect user to FDDI" [color="#2f658f"]
+			"Conventional ISP's_Connect user to FDDI" [label="Connect user to FDDI" color="#7CA4FA" margin="0,1" penwidth=2 shape=box style=rounded width="0,35"]
+			"Conventional ISP's_Connect user to FDDI" -> "Conventional ISP's_Collect
+Payment" [color="#2f658f"]
+			"Conventional ISP's_Collect
+Payment" [label="Collect
+Payment" color="#7CA4FA" margin="0,05" penwidth=2 shape=doublecircle style="" width="0,35"]
+			"Conventional ISP's_Collect
+Payment" -> "Conventional ISP's_Take
+Profit" [color="#2f658f"]
+			"Conventional ISP's_Collect
+Payment" -> "Conventional ISP's_Develop Capability" [color="#2f658f"]
+			"Conventional ISP's_Take
+Profit" [label="Take
+Profit" color="#7CA4FA" margin="0,05" penwidth=7.0 shape=circle style="" width="0,35"]
+		}
+	}
+	subgraph cluster_Customer {
+		color="#7CA4FA" label=Customer style=""
+		subgraph cluster_Customer_main {
+			color="#7CA4FA" style=""
+			label=""
+			"Customer_Need
+Internet" [label="Need
+Internet" color="#7CA4FA" margin="0,05" penwidth=2 shape=circle style="" width="0,35"]
+			"Customer_Need
+Internet" -> "Customer_Type of
+connection" [color="#2f658f"]
+			"Customer_Type of
+connection" [label="Type of
+connection" color="#7CA4FA" margin="0,1" penwidth=2 shape=diamond style="" width="0,35"]
+			"Customer_Type of
+connection" -> "Customer_Home
+Internet" [color="#2f658f"]
+			"Customer_Type of
+connection" -> "Customer_Business
+Internet" [color="#2f658f"]
+			"Customer_Home
+Internet" [label="Home
+Internet" color="#7CA4FA" margin="0,05" penwidth=2 shape=doublecircle style="" width="0,35"]
+			"Customer_Home
+Internet" -> "Customer_Evaluate existing ISP's" [color="#2f658f"]
+			"Customer_Business
+Internet" [label="Business
+Internet" color="#7CA4FA" margin="0,05" penwidth=2 shape=doublecircle style="" width="0,35"]
+			"Customer_Business
+Internet" -> "Customer_Evaluate existing ISP's" [color="#2f658f"]
+			"Customer_Evaluate existing ISP's" [label="Evaluate existing ISP's" color="#7CA4FA" margin="0,1" penwidth=2 shape=box style=rounded width="0,35"]
+			"Customer_Evaluate existing ISP's" -> "Customer_Select
+ISP" [color="#2f658f"]
+			"Customer_Select
+ISP" [label="Select
+ISP" color="#7CA4FA" margin="0,1" penwidth=2 shape=diamond style="" width="0,35"]
+			"Customer_Select
+ISP" -> "Customer_Order
+SpaceX" [color="#d15411" fontcolor="#d15411" fontname="sans bold" xlabel="+ high coverage
++ low cost
++ low latency"]
+			"Customer_Select
+ISP" -> "Customer_Order
+ViaSat/
+Iridium" [color="#d15411" fontcolor="#d15411" fontname="sans bold" xlabel="~ good coverage
+- high cost
+- high latency"]
+			"Customer_Select
+ISP" -> "Customer_Order
+conv.
+ISP" [color="#d15411" fontcolor="#d15411" fontname="sans bold" xlabel="- low coverage
++ low cost
++ low latency"]
+			"Customer_Order
+SpaceX" [label="Order
+SpaceX" color="#7CA4FA" margin="0,05" penwidth=2 shape=doublecircle style="" width="0,35"]
+			"Customer_Order
+SpaceX" -> "Customer_wait for
+availability" [color="#2f658f"]
+			"Customer_Order
+ViaSat/
+Iridium" [label="Order
+ViaSat/
+Iridium" color="#7CA4FA" margin="0,05" penwidth=2 shape=doublecircle style="" width="0,35"]
+			"Customer_Order
+ViaSat/
+Iridium" -> "Customer_wait for
+availability" [color="#2f658f"]
+			"Customer_Order
+conv.
+ISP" [label="Order
+conv.
+ISP" color="#7CA4FA" margin="0,05" penwidth=2 shape=doublecircle style="" width="0,35"]
+			"Customer_Order
+conv.
+ISP" -> "Customer_wait for
+availability" [color="#2f658f"]
+			"Customer_wait for
+availability" [label="wait for
+availability" color="#7CA4FA" margin="0,1" penwidth=2 shape=diamond style="" width="0,35"]
+			"Customer_wait for
+availability" -> "Customer_Receiver
+install" [color="#2f658f"]
+			"Customer_wait for
+availability" -> "Customer_Took
+too
+long" [color="#2f658f"]
+			"Customer_Receiver
+install" [label="Receiver
+install" color="#7CA4FA" margin="0,05" penwidth=2 shape=doublecircle style="" width="0,35"]
+			"Customer_Receiver
+install" -> "Customer_Subscription Payments" [color="#2f658f"]
+			"Customer_Subscription Payments" [label="Subscription Payments" color="#7CA4FA" margin="0,1" penwidth=2 shape=box style=rounded width="0,35"]
+			"Customer_Subscription Payments" -> "Customer_Use
+Internet
+Service" [color="#2f658f"]
+			"Customer_Took
+too
+long" [label="Took
+too
+long" color="#7CA4FA" margin="0,05" penwidth=2 shape=doublecircle style="" width="0,35"]
+			"Customer_Took
+too
+long" -> "Customer_Abandon ISP
+switch to competitor" [color="#2f658f"]
+			"Customer_Abandon ISP
+switch to competitor" [label="Abandon ISP
+switch to competitor" color="#7CA4FA" margin="0,1" penwidth=2 shape=box style=rounded width="0,35"]
+			"Customer_Abandon ISP
+switch to competitor" -> "Customer_Select
+ISP" [color="#2f658f"]
+			"Customer_Use
+Internet
+Service" [label="Use
+Internet
+Service" color="#7CA4FA" margin="0,05" penwidth=7.0 shape=circle style="" width="0,35"]
+		}
+	}
+	"SpaceX_Promote Capability" -> "Customer_Evaluate existing ISP's" [arrowhead=empty color="#2f658f" dir=forward style=dashed]
+	"Customer_Order
+SpaceX" -> "SpaceX_Deploy Network" [arrowhead=empty color="#2f658f" dir=forward style=dashed]
+	"Customer_Subscription Payments" -> "SpaceX_Collect
+Payment" [arrowhead=empty color="#2f658f" dir=forward style=dashed]
+	"SpaceX_Install Customer Devices
+1000 MB/s" -> "Customer_Receiver
+install" [arrowhead=empty color="#2f658f" dir=forward style=dashed]
+	"Customer_Order
+conv.
+ISP" -> "Conventional ISP's_Select
+Connection
+Type" [arrowhead=empty color="#2f658f" dir=forward style=dashed]
+	"Conventional ISP's_Connect user to FDDI" -> "Customer_Receiver
+install" [arrowhead=empty color="#2f658f" dir=forward style=dashed]
+	"Customer_Subscription Payments" -> "Conventional ISP's_Collect
+Payment" [arrowhead=empty color="#2f658f" dir=forward style=dashed]
+	"Conventional ISP's_Promote Capability" -> "Customer_Evaluate existing ISP's" [arrowhead=empty color="#2f658f" dir=forward style=dashed]
+	"ViaSat/Iridium_Promote Capability" -> "Customer_Evaluate existing ISP's" [arrowhead=empty color="#2f658f" dir=forward style=dashed]
+	"Customer_Order
+ViaSat/
+Iridium" -> "ViaSat/Iridium_Deploy Network" [arrowhead=empty color="#2f658f" dir=forward style=dashed]
+	"ViaSat/Iridium_Install Customer Devices
+10 MB/s" -> "Customer_Receiver
+install" [arrowhead=empty color="#2f658f" dir=forward style=dashed]
+	"Customer_Subscription Payments" -> "ViaSat/Iridium_Collect
+Payment" [arrowhead=empty color="#2f658f" dir=forward style=dashed]
+}

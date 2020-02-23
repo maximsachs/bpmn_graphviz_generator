@@ -29,15 +29,17 @@ dot.attr(splines="ortho")
 # dot.attr(rankdir="LR")
 # dot.attr(splines="true")
 dot.attr(ratio="auto")
+# dot.attr(ratio="0.6")
 # dot.attr(concentrate="true")
-# dot.attr(margin="5")
+# dot.attr(margin="")
 today = datetime.date.today()
 current_date_str = today.strftime("%d %B %Y")
-dot.attr(label=graph_name+" - "+current_date_str, labelloc="t")
+# dot.attr(label=graph_name+" - "+current_date_str, labelloc="t")
 default_fontcolor = "black"
+edge_label_color = "#d15411"
 default_style = ""
 default_fillcolor1 = "#7CA4FA"
-linecolor = "#23445D"
+linecolor = "#2f658f"
 default_fontname = "sans bold"
 default_penwidth = 2
 
@@ -75,13 +77,16 @@ for pool in bpmn:
                     node_style = default_style
                     node_penwidth = str(default_penwidth)
                     node_fixedsize = "false"
+                    node_margin ="0,1"
                     # Node formatting
                     if node_type in ["start", "end", "event"]:
                         node_fixedsize = "shape"
+                        node_margin = "0,05"
+                        # node_label = "\n"+node_label
                         if node_type in ["start", "end"]:
                             node_shape = "circle"
                             if node_type in ["end"]:
-                                node_penwidth = str(default_penwidth*4)
+                                node_penwidth = str(default_penwidth*3.5)
                         elif node_type in ["event"]:
                             node_shape = "doublecircle"
                     elif node_type in ["activity"]:
@@ -91,22 +96,33 @@ for pool in bpmn:
                         node_shape = "diamond"
                     # Adding Nodes:
                     pool_lane_dot.node(
-                            name=node_name,
-                            label=node_label,
-                            shape = node_shape,
-                            color=default_fillcolor1,
-                            style=node_style,
-                            penwidth=node_penwidth,
-                            fixedsize=node_fixedsize,
-                            )
+                        name=node_name,
+                        label=node_label,
+                        width="0,35",
+                        shape = node_shape,
+                        color=default_fillcolor1,
+                        style=node_style,
+                        penwidth=node_penwidth,
+                        margin=node_margin,
+                        # fixedsize=node_fixedsize,
+                        # fontname= default_fontname,
+                        )
                     
                     # Adding Edges:
                     if node_target:
                         if isinstance(node_target, list):
                             for index, target in enumerate(node.get("target",[])):
-                                pool_lane_dot.edge(node_name, pool+"_"+target, color=linecolor)
+                                if isinstance(target,tuple):
+                                    target, edge_label = target
+                                    pool_lane_dot.edge(node_name, pool+"_"+target, color=edge_label_color, xlabel=edge_label, fontcolor=edge_label_color, fontname= default_fontname)
+                                else:
+                                    pool_lane_dot.edge(node_name, pool+"_"+target, color=linecolor)
                         else:
-                            pool_lane_dot.edge(node_name, pool+"_"+node_target, color=linecolor)
+                            if isinstance(node_target,tuple):
+                                target, edge_label = node_target
+                                pool_lane_dot.edge(node_name, pool+"_"+target, color=edge_label_color, xlabel=edge_label, fontcolor=edge_label_color, fontname= default_fontname)
+                            else:
+                                pool_lane_dot.edge(node_name, pool+"_"+node_target, color=linecolor)
 
 for origin, target in message_flow:
     dot.edge(origin, target, style="dashed", dir="forward", arrowhead="empty", color=linecolor)
